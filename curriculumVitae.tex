@@ -1,0 +1,24 @@
+% =============================================================================
+% curriculumVitae.tex
+%
+% This is the main document that controls the content and layout of the CV.
+%
+% Rezha Adrian Tanuharja -- rezha.tanuharja@outlook.com
+% =============================================================================
+
+\documentclass{article}
+\usepackage{formats/curriculumVitae}
+
+% select a profile
+\edef\user{rezhaTanuharja}
+
+% ----- Content ---------------------------------------------------------------
+
+\begin{document}
+
+\input{profiles/\user/heading}
+\input{profiles/\user/experience}
+\input{profiles/\user/education}
+\input{profiles/\user/skills}
+
+\end{document}
