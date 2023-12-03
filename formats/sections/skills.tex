@@ -1,0 +1,48 @@
+% =============================================================================
+% formats/sections/skills.tex
+%
+% This document contains format for the skills section in a CV.
+%
+% Rezha Adrian Tanuharja -- rezha.tanuharja@outlook.com
+% =============================================================================
+
+% ----- information in each skill entry ---------------------------------------
+
+\pgfkeys{
+  /skill/.is family,
+  /skill,
+  field/.store in = \field,
+  experience/.store in = \experience,
+}
+
+% ----- storage format of each skill entry ------------------------------------
+
+\newcommand{\skillFormat}[1][]{%
+  \pgfkeys{/skill, #1}%
+  \large{\field}%
+}
+
+% ----- commands to add skill and print the skill list ------------------------
+
+% Example usage:
+%
+% \addSkill{%
+%   field={C/C++},
+%   experience={11 years},
+% }
+
+\newcommand{\addSkill}[1]{%
+  \listadd{\skillList}{%
+    {\skillFormat[#1]}%
+  }
+}
+
+% Example usage:
+%
+% \printSkills{IT Skills}
+
+\newcommand{\printSkills}[1]{%
+  \large{\textbf{#1}: }%
+  \printList[\inlineSep]{\skillList}%
+  \renewcommand{\skillList}{}
+}
