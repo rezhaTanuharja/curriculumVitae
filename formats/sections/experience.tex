@@ -1,0 +1,63 @@
+% =============================================================================
+% formats/sections/experience.tex
+%
+% This document contains format for the work experience section in a CV.
+%
+% Rezha Adrian Tanuharja -- rezha.tanuharja@outlook.com
+% =============================================================================
+
+% ----- information in each experience entry ----------------------------------
+
+\pgfkeys{
+  /exp/.is family,
+  /exp,
+  position/.store in = \position,
+  organization/.store in = \organization,
+  period/.store in = \period,
+  description/.store in = \description
+}
+
+% ----- storage format of each experience entry -------------------------------
+
+\newcommand{\expFormat}[1][]{%
+  \pgfkeys{/exp, #1}%
+  \large{%
+    \textbf{\position} \hfill \textbf{\period}\par
+    {\organization}
+    \ifdefvoid{\description}{}{%
+      \begin{itemize}[itemsep=\bulletGap]
+        \foreach \element in \description {%
+          \item \element%
+        }%
+      \end{itemize}
+    }
+  }
+}
+
+% ----- commands to add experience and print the experience list --------------
+
+% Example usage:
+%
+% \addExperience{%
+%   position={Vice President},
+%   organization={Google},
+%   period={2020 -- present},
+%   description={%
+%     Amazing achievement 1.,%
+%     Amazing achievement 2.,%
+%     Amazing achievement 3.,%
+%     Amazing achievement 4.
+%   }
+% }
+
+\newcommand{\addExperience}[1]{%
+  \listadd{\expList}{%
+    {\expFormat[#1]}
+  }
+}
+
+\newcommand{\printExperience}{%
+  \section{Professional Experience}
+  \printList{\expList}
+  \renewcommand{\expList}{}
+}
