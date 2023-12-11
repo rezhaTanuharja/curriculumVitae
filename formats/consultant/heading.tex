@@ -1,5 +1,5 @@
 % =============================================================================
-% formats/sections/heading.tex
+% formats/consultant/heading.tex
 %
 % This document defines format for the CV's heading.
 %
@@ -12,9 +12,11 @@
   /personalData/.is family,
   /personalData,
   name/.store in = \name,
+  highlight/.store in = \highlight,
   phone/.store in = \phone,
   email/.store in = \email,
-  location/.store in = \location
+  location/.store in = \location,
+  portfolio/.store in = \portfolio
 }
 
 % ----- command to add a heading ----------------------------------------------
@@ -35,7 +37,7 @@
     \vspace{0.25\nominalGap}
     \large{\href{mailto:\email}{\email}}
     \hspace{0.25\nominalGap}\textbullet\hspace{0.25\nominalGap}
-    \large{\phone}
+    \large{\href{tel:\phone}{\phone}}
     \hspace{0.25\nominalGap}\textbullet\hspace{0.25\nominalGap}
     \large{\location}
   \end{center}

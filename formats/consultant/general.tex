@@ -1,0 +1,18 @@
+% =============================================================================
+% formats/consultant/general.tex
+%
+% This document defines format for the CV's heading.
+%
+% Rezha Adrian Tanuharja -- rezha.tanuharja@outlook.com
+% =============================================================================
+
+% ----- section title formatting ----------------------------------------------
+
+\renewcommand{\section}[1]{%
+  \begin{center}                          % centered section title
+    \vspace{\nominalGap}                  % add space to previous section
+    \Large{\textbf{#1}}\\                 % large and bold title
+    \vspace{-0.75\nominalGap}
+    \hrulefill                            % tight horizontal line below title
+  \end{center}
+}

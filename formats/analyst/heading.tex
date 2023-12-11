@@ -1,0 +1,58 @@
+% =============================================================================
+% formats/techs/sections/heading.tex
+%
+% This document defines format for the CV's heading.
+%
+% Rezha Adrian Tanuharja -- rezha.tanuharja@outlook.com
+% =============================================================================
+
+% ----- information in a heading ----------------------------------------------
+
+\pgfkeys{
+  /personalData/.is family,
+  /personalData,
+  name/.store in = \name,
+  highlight/.store in = \highlight,
+  phone/.store in = \phone,
+  email/.store in = \email,
+  location/.store in = \location,
+  portfolio/.store in = \portfolio
+}
+
+% ----- command to add a heading ----------------------------------------------
+
+% Example usage:
+%
+% \personalData[%
+%   name={Rezha Adrian Tanuharja},
+%   title={Simulation Engineer and Data Enthusiast}
+%   phone={(+1)12 3456 7890},
+%   email={rezha.tanuharja@outlook.com},
+%   location={Houston -- U.S.}
+% ]
+
+% \newcommand{\parseNumber}[1]{%
+%   \StrSubstitute{#1}{ }{}[\tempstr]%
+%   \StrSubstitute{\tempstr}{(}{}[\tempstr]%
+%   \StrSubstitute{\tempstr}{)}{}[\tempstr]%
+%   \tempstr
+% }
+%
+\newcommand{\personalData}[1][]{%
+  \pgfkeys{/personalData, #1}%
+  \begin{minipage}[t]{0.6\textwidth}%
+    \begin{raggedright}%
+      \large{\highlight}\vspace{0.4\nominalGap}\\%
+      \Huge{\textbf{\name}}%
+    \end{raggedright}%
+  \end{minipage}%
+  \hfill%
+  \begin{minipage}[t]{0.33\textwidth}%
+    \begin{raggedleft}%
+      \large{\href{\portfolio}{\portfolio}}\\%
+      \large{\href{mailto:\email}{\email}}\\%
+      \large{\href{tel:\phone}{\phone}}\\%
+    \end{raggedleft}%
+  \end{minipage}%
+  \vspace{2.0\nominalGap}\par
+}

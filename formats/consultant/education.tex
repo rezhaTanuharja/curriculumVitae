@@ -1,0 +1,67 @@
+% =============================================================================
+% formats/consultant/education.tex
+%
+% This document contains format for the education section in a CV.
+%
+% Rezha Adrian Tanuharja -- rezha.tanuharja@outlook.com
+% =============================================================================
+
+% ----- information in each education entry -----------------------------------
+
+\pgfkeys{
+  /education/.is family,
+  /education,
+  institution/.store in = \institution,
+  program/.store in = \program,
+  period/.store in = \period,
+  GPA/.store in = \GPA,
+  focus/.store in = \focus
+}
+
+% ----- storage format of each education entry --------------------------------
+
+\newcommand{\educationFormat}[1][]{%
+  \pgfkeys{/education, #1}%
+  \large{%
+    \textbf{\program} \hfill \textbf{\period}\par
+    {\institution}\par%
+    {\GPA}\par
+    \ifdefvoid{\focus}{}{%
+      \vspace{\nominalGap}
+      {Focus area:}
+      \begin{itemize}[itemsep=\bulletGap]
+        \foreach \element in \focus {%
+          \item \element%
+        }%
+      \end{itemize}
+    }
+  }
+}
+
+% ----- commands to add education and print the education list ----------------
+
+% Example usage:
+%
+% \addEducation{%
+%   institution={University of Oxford},
+%   program={B.Sc. Applied Mathematics},
+%   period={2021 -- 2023},
+%   GPA={GPA 3.95 / 4.00},
+%   focus={%
+%     Time series analysis for modern banking system.,%
+%     Predictive modelling in the finance sector.,%
+%     Numerical simulation of society.
+%   }
+% }
+
+\newcommand{\addEducation}[1]{%
+  \listadd{\educationList}{%
+    {\educationFormat[#1]}
+  }
+}
+
+\newcommand{\printEducation}{%
+  \section{Education}%
+  \printList{\educationList}
+  \renewcommand{\educationList}{}
+}

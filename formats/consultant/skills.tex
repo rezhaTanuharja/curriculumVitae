@@ -1,0 +1,66 @@
+% =============================================================================
+% formats/consultant/skills.tex
+%
+% This document contains format for the skills section in a CV.
+%
+% Rezha Adrian Tanuharja -- rezha.tanuharja@outlook.com
+% =============================================================================
+
+% ----- information in each skill entry ---------------------------------------
+
+\pgfkeys{
+  /skill/.is family,
+  /skill,
+  field/.store in = \field,
+  details/.store in = \details,
+  experience/.store in = \experience,
+}
+
+% ----- storage format of each skill entry ------------------------------------
+
+\newcommand{\skillFormat}[1][]{%
+  \pgfkeys{/skill, #1}%
+  \large{\field}%
+}
+
+\newcommand{\languageFormat}[1][]{%
+  \skillFormat{#1}%
+}
+
+% ----- commands to add skill and print the skill list ------------------------
+
+% Example usage:
+%
+% \addSkill{%
+%   field={C/C++},
+%   experience={11 years},
+% }
+
+\newcommand{\addSkill}[1]{%
+  \listadd{\skillList}{%
+    {\skillFormat[#1]}%
+  }
+}
+
+\newcommand{\addLanguage}[1]{%
+  \addSkill{#1}
+}
+
+% Example usage:
+%
+% \printSkills{IT Skills}
+
+\newcommand{\printSkills}[1]{%
+  \large{\textbf{#1}: }%
+  \printList[\inlineSep]{\skillList}%
+  \renewcommand{\skillList}{}
+}
+
+\newcommand{\printTechnicalSkills}{%
+  \section{Skills}
+  \printSkills{Technical}
+}
+
+\newcommand{\printLanguages}{%
+  \printSkills{Languages}
+}

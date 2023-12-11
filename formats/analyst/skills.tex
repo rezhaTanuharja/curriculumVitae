@@ -1,5 +1,5 @@
 % =============================================================================
-% formats/sections/skills.tex
+% formats/consultant/skills.tex
 %
 % This document contains format for the skills section in a CV.
 %
@@ -12,12 +12,26 @@
   /skill/.is family,
   /skill,
   field/.store in = \field,
+  details/.store in = \details,
   experience/.store in = \experience,
 }
 
 % ----- storage format of each skill entry ------------------------------------
 
 \newcommand{\skillFormat}[1][]{%
+  \pgfkeys{/skill, #1}%
+  \large{%
+    \textbullet%
+    \hspace{0.2\nominalGap}%
+    \field%
+    \hspace{0.2\nominalGap}%
+    \ifdefvoid{\details}{}{%
+      (\details)%
+    }%
+  }%
+}
+
+\newcommand{\languageFormat}[1][]{%
   \pgfkeys{/skill, #1}%
   \large{\field}%
 }
@@ -37,12 +51,28 @@
   }
 }
 
+\newcommand{\addLanguage}[1]{%
+  \listadd{\skillList}{%
+    {\languageFormat[#1]}%
+  }
+}
+
 % Example usage:
 %
 % \printSkills{IT Skills}
 
-\newcommand{\printSkills}[1]{%
-  \large{\textbf{#1}: }%
+\newcommand{\printTechnicalSkills}{%
+  \section{Skills}
+  \begin{multicols}{3}
+    \begin{flushend}
+      \printList[\vspace{0.4\nominalGap}\\]{\skillList}%
+    \end{flushend}
+  \end{multicols}
+  \renewcommand{\skillList}{}
+}
+
+\newcommand{\printLanguages}{%
+  \section{Languages}
   \printList[\inlineSep]{\skillList}%
   \renewcommand{\skillList}{}
 }

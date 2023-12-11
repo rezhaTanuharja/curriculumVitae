@@ -1,17 +1,31 @@
 % =============================================================================
-% formats/curriculumVitae.sty
+% formats/curriculumVitae.cls
 %
-% This style provides format and custom commands to create a CV with the MIT
-% resume layout.
+% This is a modular and extensible document class for curriculum vitae.
 %
 % Rezha Adrian Tanuharja -- rezha.tanuharja@outlook.com
 % =============================================================================
 
-\NeedsTeXFormat{LaTeX2e}
+% ----- create a new class based on the document class article ----------------
 
-\ProvidesPackage{formats/curriculumVitae}[%
-  2023/11/14 v1.0 CV
-]
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{formats/curriculumVitae}[2023/12/11 v2.0 CV]
+
+\LoadClass{article}
+
+% ----- facilitate different stylings -----------------------------------------
+
+\newcommand{\styling}{consultant}
+
+\DeclareOption{consultant}{
+  \renewcommand{\styling}{consultant}
+}
+
+\DeclareOption{analyst}{
+  \renewcommand{\styling}{analyst}
+}
+
+\ProcessOptions\relax
 
 \input{formats/includes/packages}
 
@@ -34,17 +48,6 @@
 
 \newcommand{\inlineSep}{, }
 
-% ----- section title formatting ----------------------------------------------
-
-\renewcommand{\section}[1]{%
-  \begin{center}                          % centered section title
-    \vspace{\nominalGap}                  % add space to previous section
-    \Large{\textbf{#1}}\\                 % large and bold title
-    \vspace{-0.75\nominalGap}
-    \hrulefill                            % tight horizontal line below title
-  \end{center}
-}
-
 % ----- hyperlinks formatting -------------------------------------------------
 
 \hypersetup{%
@@ -63,7 +66,8 @@
 
 % ----- sections formatting ---------------------------------------------------
 
-\input{formats/sections/heading}
-\input{formats/sections/experience}
-\input{formats/sections/education}
-\input{formats/sections/skills}
+\input{formats/\styling/general}
+\input{formats/\styling/heading}
+\input{formats/\styling/education}
+\input{formats/\styling/experience}
+\input{formats/\styling/skills}
